@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Thumbnail Downloader</title>
+    <style>
+        body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to right, #ffecd2, #fcb69f);
+        text-align: center;
+        padding: 50px;
+        color: #333;
+    }
+    h1 {
+        color: #ff4b2b;
+        font-size: 36px;
+    }
+    input {
+        width: 60%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    button {
+        background-color: #ff416c;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #ff4b2b;
+    }
+    .thumbnail {
+        margin-top: 30px;
+    }
+    img {
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        max-width: 90%;
+        height: auto;
+    }
+    a {
+        display: inline-block;
+        margin-top: 10px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 8px;
+    }
+    a:hover {
+        background-color: #45a049;
+    }
+    </style>
+</head>
+<body>
+    <h1>YouTube Thumbnail Downloader</h1>
+    <input type="text" id="youtubeUrl" placeholder="Enter YouTube Video URL">
+    <button onclick="getThumbnail()">Download Thumbnail</button>
+    <div class="thumbnail" id="thumbnailContainer"></div>
+
+    <script>
+        function getThumbnail() {
+            const url = document.getElementById('youtubeUrl').value;
+            const videoId = url.split("v=")[1]?.split("&")[0];
+            if (videoId) {
+                const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                document.getElementById('thumbnailContainer').innerHTML = `
+                    <img src="${thumbnailUrl}" alt="Thumbnail" width="480"><br>
+                    <a href="${thumbnailUrl}" download>Click here to download</a>
+                `;
+            } else {
+                alert("Please enter a valid YouTube URL!");
+            }
+        }
+    </script>
+</body>
+</html>
