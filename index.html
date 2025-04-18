@@ -112,20 +112,25 @@
   </div>
 
   <script>
-    function getThumbnail() {
-      const url = document.getElementById('youtubeUrl').value.trim();
-      const videoId = url.split("v=")[1]?.split("&")[0];
-      if (videoId) {
-        const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-        document.getElementById('thumbnailContainer').innerHTML = `
-          <img src="${thumbnailUrl}" alt="Thumbnail">
-          <br>
-          <a href="${thumbnailUrl}" class="download-btn" download>⬇️ Download Thumbnail</a>
-        `;
-      } else {
-        alert("🚫 Please enter a valid YouTube URL!");
-      }
+  function getThumbnail() {
+    const url = document.getElementById('youtubeUrl').value.trim();
+
+    // Regex to extract video ID from various YouTube URL formats
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    const videoId = match ? match[1] : null;
+
+    if (videoId) {
+      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      document.getElementById('thumbnailContainer').innerHTML = `
+        <img src="${thumbnailUrl}" alt="Thumbnail">
+        <br>
+        <a href="${thumbnailUrl}" class="download-btn" download>⬇️ Download Thumbnail</a>
+      `;
+    } else {
+      alert("🚫 Please enter a valid YouTube URL!");
     }
+  }
   </script>
 </body>
 </html>
